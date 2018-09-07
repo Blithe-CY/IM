@@ -34,9 +34,6 @@ public class User  {
     @Column(name = "user_type", nullable = false)
     private Integer user_type;
 
-    @Column(name = "user_percent")
-    private String user_percent;
-
     @Column(name = "user_mail")
     private String user_mail;
 
@@ -104,19 +101,15 @@ public class User  {
         this.user_type = user_type;
     }
 
-    public String getUser_percent() {
-        return user_percent;
-    }
-
-    public void setUser_percent(String user_percent) {
-        this.user_percent = user_percent;
-    }
-
     public String getUser_mail() {
         return user_mail;
     }
 
     public void setUser_mail(String user_mail) {
         this.user_mail = user_mail;
+    }
+
+    public String toString(){
+        return "id:" + this.getUserId() + " name:" + this.getUser_name();
     }
 }

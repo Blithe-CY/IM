@@ -32,5 +32,10 @@ public class InvoiceServiceImpl implements InvoiceService{
         invoiceRepository.deleteByInvoiceId(id);
     }
 
+    @Override
+    public List<Invoice> getInvoiceListByUserId(String id)
+    {
+        return invoiceRepository.findByUserId(id);
+    }
 
 }

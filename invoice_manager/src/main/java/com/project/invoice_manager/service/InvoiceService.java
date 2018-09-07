@@ -9,4 +9,5 @@ public interface InvoiceService {
     Invoice findInvoiceById(String id);
     void save(Invoice invoice);
     void deleteInvoiceById(String id);
+    List<Invoice> getInvoiceListByUserId(String id);
 }

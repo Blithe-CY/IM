@@ -1,16 +1,22 @@
 package com.project.invoice_manager.entity;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import java.util.Date;
 
 @Entity(name="tbl_invoice")
 public class Invoice {
+
     @Id
-    @Column(name="invoice_id",unique = true,nullable = false)
+    @Column(name="invoice_id",unique = true,nullable = false,length = 8)
     private String invoiceId;
+
+    @Column(name="user_id",nullable = false)
+    private String userId;
 
     @Column(nullable = false)
     private String invoice_name;
@@ -19,7 +25,7 @@ public class Invoice {
     private String invoice_type;
 
     @Column(nullable = false)
-    private Integer invoice_money;
+    private String invoice_money;
 
     @Column(nullable = false)
     private String user_name;
@@ -37,7 +43,7 @@ public class Invoice {
     private String location;
 
     @Column(nullable = false)
-    private Date upload_time;
+    private String upload_time;
 
     public String getInvoiceId() {
         return invoiceId;
@@ -63,11 +69,11 @@ public class Invoice {
         this.invoice_type = invoice_type;
     }
 
-    public Integer getInvoice_money() {
+    public String getInvoice_money() {
         return invoice_money;
     }
 
-    public void setInvoice_money(Integer invoice_money) {
+    public void setInvoice_money(String invoice_money) {
         this.invoice_money = invoice_money;
     }
 
@@ -111,11 +117,27 @@ public class Invoice {
         this.location = location;
     }
 
-    public Date getUpload_time() {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUpload_time() {
         return upload_time;
     }
 
-    public void setUpload_time(Date upload_time) {
+    public void setUpload_time(String upload_time) {
         this.upload_time = upload_time;
+    }
+
+    public String getUser_id() {
+        return userId;
+    }
+
+    public void setUser_id(String userId) {
+        this.userId = userId;
     }
 }

@@ -6,37 +6,51 @@ import com.project.invoice_manager.service.ResponseFactory;
 import com.project.invoice_manager.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
-
+// 支持跨域
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
     private UserService userService;
-    // 支持跨域
-    @CrossOrigin
+
     @PostMapping("/alterInfo")
-    public Response alterInfo(User user,String user_id){
+    public Response alterInfo(@RequestBody Map<String, String> user){
         try{
             // JPA自身的save无法局部更新
             // 暂时先用这种方法
-            User res = userService.findUserById(user_id);
-            if(user.getUser_name().equals(""))
-                res.setUser_name(user.getUser_name());
-            if(user.getUser_mail().equals(""))
-                res.setUser_mail(user.getUser_mail());
-            if(user.getUser_phone().equals(""))
-                res.setUser_phone(user.getUser_phone());
-            if(user.getUser_gender().equals(""))
-                res.setUser_gender(user.getUser_gender());
-            if(user.getUser_account().equals(""))
-                res.setUser_account(user.getUser_account());
+            System.out.println(user.toString());
+            System.out.println("userId:"+user.get("user_id"));
+            User res = userService.findUserById(user.get("user_id"));
+            System.out.print("用户：");
+            System.out.println(res);
+            if(!user.get("user_name").equals(""))
+                res.setUser_name(user.get("user_name"));
+            System.out.println("getname");
+            if(!user.get("user_mail").equals(""))
+                res.setUser_mail(user.get("user_mail"));
+            System.out.println("getmail");
+            if(!user.get("user_phone").equals(""))
+                res.setUser_phone(user.get("user_phone"));
+            System.out.println("getphone");
+            if(!user.get("user_gender").equals(""))
+                res.setUser_gender(user.get("user_gender"));
+            System.out.println("getgender");
+            if(!user.get("user_qq").equals(""))
+                res.setUser_qq(user.get("user_qq"));
+            System.out.println("getqq");
+            System.out.println(userService);
 
+            System.out.println(res);
             userService.save(res);
             return ResponseFactory.SuccessResponse(null);
         }
